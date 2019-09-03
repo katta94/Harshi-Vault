@@ -1,0 +1,19 @@
+Check version of Vault use below command
+$ vault secrets list -detailed
+
+Enable KV Secret Engine (Execute the following command to enable the key/value secret engine v1 at kv-v1/)
+$ vault secrets enable -path="kv-v1" -version=1 kv
+
+Store the Google API key
+$ vault kv put kv-v1/<PATH> <KEY>=VALUE>
+example: $ vault kv put kv-v1/eng/apikey/Google key=AAaaBBccDDeeOTXzSMT1234BB_Z8JzG7JkSVxI
+
+Store the root certificate for MySQL
+$ vault kv put kv-v1/prod/cert/mysql cert=@cert.pem
+
+Generate a token for apps
+$ vault token create -policy="apps"
+
+Retrieve the secrets
+$ vault kv get kv-v1/<PATH>
+example: $ vault kv get kv-v1/eng/apikey/Google
